@@ -1,0 +1,27 @@
+{
+        "dne": {
+                "dev": {
+                        "sites":[ "default", "bigstory", "hosted", "pro32", "collegefootball", "elections", "polls", "dne", "summergames", "wintergames", "racing" ],
+                        "cachedomains":[ "hos", "all", "ele" ],
+                        "goliveswitch":[ "dne.dev.web.us-east-1.aptechdevlab.com" ]
+                },
+                "qa": {
+                        "sites":[ "default", "bigstory", "pro32", "hosted", "collegefootball", "elections", "polls", "dne", "summergames", "wintergames", "racing" ],
+                        "cachedomains":[ "hos", "all", "ele" ],
+                        "goliveswitch":[ "dne.qa.web.us-east-1.aptechlab.com" ]
+                },
+                "prod": {
+                        "sites":[ "default", "bigstory", "pro32", "collegefootball", "hosted", "elections", "polls", "dne", "summergames", "wintergames", "racing" ],
+                        "cachedomains":[ "hos", "all", "ele" ],
+                        "goliveswitch":[ "dne.prod.web.us-east-1.associatedpress.com" ]
+                },
+                "dr": {
+                        "originservers":[ "origin-elections.dne.associatedpress.com", "origin-dne.dne.associatedpress.com" ],
+                        "goliveswitch":[ "dne.prod.web.us-west-2.associatedpress.com" ]
+                },
+                "drinteractive": {
+                        "originservers":[ "origin-interactive.dne.associatedpress.com" ],
+                        "goliveswitch":[ "dne.prod.web.us-west-2.associatedpress.com" ]
+                }
+        }
+}

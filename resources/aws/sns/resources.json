@@ -1,0 +1,10 @@
+{
+        "dne": {
+                "qa": {
+                        "topics":[ "dnecbb", "dnecfb", "dnepro", "dnedne", "dnehos", "dneele", "dnewin", "dnesum" , "dnerac" ]
+                },
+                "prod": {
+                        "topics":[ "dnecbb", "dnecfb", "dnepro", "dnehos", "dneele", "dnewin", "dnesum" , "dnerac" ]
+                }
+        }
+}
