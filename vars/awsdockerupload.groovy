@@ -23,7 +23,7 @@ def uploadFile(awsroleArn,imagename) {
                 {
                 sh("/usr/bin/aws --region us-east-1 ecr get-login --no-include-email")
                 }
-                sh("docker tag ${imagename} 559994907943.dkr.ecr.us-east-1.amazonaws.com/rshetty-testing-002:latest")
+                sh("docker tag my-image:13 559994907943.dkr.ecr.us-east-1.amazonaws.com/rshetty-testing-002:latest")
                 sh("docker push 559994907943.dkr.ecr.us-east-1.amazonaws.com/rshetty-testing-002:latest")
 }
 
