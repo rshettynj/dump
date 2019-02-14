@@ -61,7 +61,7 @@ def uploadFile(bucketName,source,destination,awsroleArn) {
                 }
                 else
                 {
-                sh("/usr/bin/aws --region us-east-1 s3 cp ${uploadsourceFile} s3://${bucketName}/${targetFile}")
+                sh("/usr/bin/aws --region us-east-1 s3 cp ${source} s3://${bucketName}/${destination}")
                 }
 }
 
