@@ -1,0 +1,53 @@
+{
+    "aws": {
+    "fargate": {
+        "environment": "fargate",
+        "services": "Demo",
+        "awsrole": "arn:aws:iam::559994907943:role/jenkins-role",
+        "vendor": "aws",
+	"supportteam" : "roshan_shetty@hotmail.com",
+        "stacknameprefix": "ecs-fargate-td-v",
+        "websecuritygroup": "",
+        "templateurl": "https://s3.amazonaws.com/rshetty-aws-general-bucket/cloudformation/ecs-fargate-td.template",
+        "efsdneid": "",
+	"webamiid": "",
+        "topicarn": "",
+        "notificationarn": "",
+        "dashboard" : {
+        "environment": "qa",
+        "services": "Demo",
+        "vendor": "aws",
+        "supportteam" : "roshan_shetty@hotmail.com",
+        "stacknameprefix": "dne-qa-associatedpressqa-dashboard-full-v",
+        "templateurl": "https://s3.amazonaws.com/dne-qa-associatedpressprod-us-east-1-web/CloudFormation/dashboard.template",
+        "topicarn": "arn:aws:sns:us-east-1::dne-cf-stack",
+        "notificationarn": "arn:aws:lambda:us-east-1::function:dne-cf-notifications"
+        }
+    },
+    "blahblah": {
+        "environment": "prod",
+        "services": "DNE",
+        "awsrole": "arn:aws:iam::559994907943:role/jenkins-role",
+        "vendor": "aws",
+	"supportteam" : "sysunix@org",
+        "stacknameprefix": "dne-prod-associatedpressprod-web-full-v",
+        "websecuritygroup": "",
+        "templateurl": "https://s3.amazonaws.com/dne-prod-associatedpressprod-us-east-1-web/CloudFormation/dne.template",
+        "efsinteractivesid": "",
+        "efsdneid": "",
+	"webamiid": "",
+        "topicarn": "arn:aws:sns:us-east-1::dne-cf-stack",
+        "notificationarn": "arn:aws:lambda:us-east-1::function:dne-cf-notifications",
+    	"dashboard" : {
+        "environment": "prod",
+        "services": "DNE",
+        "vendor": "aws",
+        "supportteam" : "sysunix@org",
+        "stacknameprefix": "dne-prod-associatedpressprod-dashboard-full-v",
+        "templateurl": "https://s3.amazonaws.com/dne-prod-associatedpressprod-us-east-1-web/CloudFormation/dashboard.template",
+        "topicarn": "arn:aws:sns:us-east-1::dne-cf-stack",
+        "notificationarn": "arn:aws:lambda:us-east-1::function:dne-cf-notifications"
+        }
+    }
+ }
+}
