@@ -27,7 +27,7 @@ def uploadFile(awsroleArn,imagename) {
                 writeFile file: "/tmp/run.sh", text: "${out}"
                 }
                 sh("docker tag my-image:13 559994907943.dkr.ecr.us-east-1.amazonaws.com/rshetty-testing-002:latest")
-                sh("echo $out | sh")
+                sh("sh /tmp/run.sh")
                 sh("docker push 559994907943.dkr.ecr.us-east-1.amazonaws.com/rshetty-testing-002:latest")
 }
 
