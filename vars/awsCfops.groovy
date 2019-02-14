@@ -22,7 +22,7 @@ def call(body) {
                 }
 		if ("${config}".contains( 'createStack') == true) { 
 			def resource = getresources("${bt}","${config.resourcePath}")
-			def result = createstack("${config.environment}","${config.awsroleArn}",resource,"${awsregion}")
+			def result = createstackfargate("${config.environment}","${config.awsroleArn}",resource,"${awsregion}")
 			def value = deserialize("${result}")
 			echo "STACK IS ${value.StackId}"
 
@@ -205,8 +205,8 @@ def createstack(environment,awsroleArn,resource,awsregion) {
                 }
 }
 
-def createecache(environment,awsroleArn,resource) {
-        stage 'Creating CF Stack for elasticache'
+def createstackfargate(environment,awsroleArn,resource) {
+        stage 'Creating CF Stack for Fargate task definition'
                 if ("${awsroleArn}" != "null") {
                 arn = "${awsroleArn}"
                 echo "role name is: ${arn}"
@@ -218,20 +218,12 @@ def createecache(environment,awsroleArn,resource) {
                 def AWS_SECRET_ACCESS_KEY = keysList[2].trim()
                 def out = deserialize(resource)
                 switch (environment) {
-                        case 'dne.dev':
-                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.dne.dev.cachenameprefix}\"\"${BUILD_NUMBER}\" --template-url \"${out.dne.dev.cachetemplateurl}\" --parameters ParameterKey=EnvironmentVersion,ParameterValue=\"${BUILD_NUMBER}\" ParameterKey=WebSecurityGroup,ParameterValue=\"${out.dne.dev.websecuritygroup}\" ParameterKey=CacheNodeType,ParameterValue=\"${out.dne.dev.cacheboostsize}\" --tags Key=\"Name\",Value=\"${out.dne.dev.environment}\" Key=\"Services\",Value=\"${out.dne.dev.services}\" Key=\"Support Team\",Value=\"${out.dne.dev.supportteam}\" Key=\"Environment\",Value=\"${out.dne.dev.environment}\" --capabilities CAPABILITY_IAM")
-                                return "${stackid}"
-                        break
-                        case 'dne.qa':
-                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.dne.qa.cachenameprefix}\"\"${BUILD_NUMBER}\" --template-url \"${out.dne.qa.cachetemplateurl}\" --parameters ParameterKey=EnvironmentVersion,ParameterValue=\"${BUILD_NUMBER}\" ParameterKey=WebSecurityGroup,ParameterValue=\"${out.dne.qa.websecuritygroup}\" ParameterKey=CacheNodeType,ParameterValue=\"${out.dne.qa.cacheboostsize}\" --tags Key=\"Name\",Value=\"${out.dne.qa.environment}\" Key=\"Services\",Value=\"${out.dne.qa.services}\" Key=\"Support Team\",Value=\"${out.dne.qa.supportteam}\" Key=\"Environment\",Value=\"${out.dne.qa.environment}\" --capabilities CAPABILITY_IAM")
-                                return "${stackid}"
-                        break
-                        case 'dne.prod':
-                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.dne.prod.cachenameprefix}\"\"${BUILD_NUMBER}\" --template-url \"${out.dne.prod.cachetemplateurl}\" --parameters ParameterKey=EnvironmentVersion,ParameterValue=\"${BUILD_NUMBER}\" ParameterKey=WebSecurityGroup,ParameterValue=\"${out.dne.prod.websecuritygroup}\" ParameterKey=CacheNodeType,ParameterValue=\"${out.dne.prod.cacheboostsize}\" --tags Key=\"Name\",Value=\"${out.dne.prod.environment}\" Key=\"Services\",Value=\"${out.dne.prod.services}\" Key=\"Support Team\",Value=\"${out.dne.prod.supportteam}\" Key=\"Environment\",Value=\"${out.dne.prod.environment}\" --capabilities CAPABILITY_IAM")
+                        case 'aws.fargate':
+                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.aws.fargate.stacknameprefix\"\"${BUILD_NUMBER}\" --template-url \"${out.aws.fargate.templateurl}\" --tags Key=\"Name\",Value=\"${out.aws.fargate.environment}\" Key=\"Services\",Value=\"${out.aws.fargate.services}\" Key=\"Support Team\",Value=\"${out.aws.fargate.supportteam}\" Key=\"Environment\",Value=\"${out.aws.fargate.environment}\" --capabilities CAPABILITY_IAM")
                                 return "${stackid}"
                         break
 			default:
-				echo "Please make a correct environment choice (dne.dev/dne.qa/dne.prod)"
+				echo "Please make a correct environment choice (aws.fargate)"
 			break
                 }
           }
