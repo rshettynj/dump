@@ -205,7 +205,7 @@ def createstack(environment,awsroleArn,resource,awsregion) {
                 }
 }
 
-def createstackfargate(environment,awsroleArn,resource) {
+def createstackfargate(environment,awsroleArn,resource,region) {
         stage 'Creating CF Stack for Fargate task definition'
                 if ("${awsroleArn}" != "null") {
                 arn = "${awsroleArn}"
