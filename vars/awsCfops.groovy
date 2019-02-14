@@ -219,7 +219,7 @@ def createstackfargate(environment,awsroleArn,resource,region) {
                 def out = deserialize(resource)
                 switch (environment) {
                         case 'aws.fargate':
-                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.aws.fargate.stacknameprefix}\"\"${BUILD_NUMBER}\" --template-url \"${out.aws.fargate.templateurl}\" --tags Key=\"Name\",Value=\"${out.aws.fargate.environment}\" Key=\"Services\",Value=\"${out.aws.fargate.services}\" Key=\"Support Team\",Value=\"${out.aws.fargate.supportteam}\" Key=\"Environment\",Value=\"${out.aws.fargate.environment}\" --capabilities CAPABILITY_IAM")
+                                def stackid = sh(returnStdout: true, script: "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 cloudformation create-stack --stack-name \"${out.aws.fargate.stacknameprefix}\"\"${BUILD_NUMBER}\" --template-url \"${out.aws.fargate.templateurl}\" --tags Key=\"Name\",Value=\"${out.aws.fargate.environment}\" Key=\"Services\",Value=\"${out.aws.fargate.services}\" Key=\"Support Team\",Value=\"${out.aws.fargate.supportteam}\" Key=\"Environment\",Value=\"${out.aws.fargate.environment}\" --capabilities CAPABILITY_NAMED_IAM")
                                 return "${stackid}"
                         break
 			default:
