@@ -4,10 +4,10 @@
         body.delegate = config
         body()
 		stage 'create ecr repository'
-		uploadFile("${config.awsroleArn}") 
+		uploadFile("${config.awsroleArn}","${config.ecrname}") 
  }
 
-def uploadFile(awsroleArn) {
+def uploadFile(awsroleArn,ecrname) {
                 if ("${awsroleArn}" != "null") {
                 arn = "${awsroleArn}"
                 echo "role name is: ${arn}"
@@ -17,11 +17,11 @@ def uploadFile(awsroleArn) {
                 def AWS_ACCESS_KEY_ID = keysList[0].trim()
                 def AWS_SECURITY_TOKEN = keysList[1].trim()
                 def AWS_SECRET_ACCESS_KEY = keysList[2].trim()
-                sh("AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 ecr create-repository --repository-name rshetty-testing123")
+                sh("AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_SECURITY_TOKEN=${AWS_SECURITY_TOKEN} /usr/bin/aws --region us-east-1 ecr create-repository --repository-name ${ecrname}")
                 }
                 else
                 {
-                sh("/usr/bin/aws --region us-east-1 ecr create-repository --repository-name rshetty-testing123")
+                sh("/usr/bin/aws --region us-east-1 ecr create-repository --repository-name ${ecrname}")
                 }
 }
 
